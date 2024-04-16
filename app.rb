@@ -2,6 +2,11 @@ require "sinatra"
 require "sinatra/reloader"
 
 
+
+get("/") do
+  redirect("/square/new")
+end
+
 get("/square/new") do
   erb(:new_square_calc)
 end
@@ -61,14 +66,4 @@ get("/random/results") do
   @max_val = params.fetch("user_max").to_f
   @rand_output = rand(@min_val..@max_val)
   erb(:random_results)
-end
-
-
-
-
-get("/") do
-  "
-  <h1>Welcome to your Sinatra App!</h1>
-  <p>Define some routes in app.rb</p>
-  "
 end
