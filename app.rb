@@ -53,7 +53,12 @@ get("/random/new") do
   erb(:new_random)
 end
 
-
+get("/random/results") do
+  @min_val = params.fetch("user_min").to_f
+  @max_val = params.fetch("user_max").to_f
+  @rand_output = rand(@min_val..@max_val)
+  erb(:random_results)
+end
 
 
 
