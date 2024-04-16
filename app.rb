@@ -24,9 +24,34 @@ end
 
 
 
+get("/payment/new") do
+  erb(:new_payment)
+end
 
 
+get("/payment/results") do
+  @the_apr = params.fetch("user_apr").to_f
+  @the_years = params.fetch("user_years").to_f
 
+  @the_r = ((params.fetch("user_apr").to_f)/100)/12
+  @the_n = (params.fetch("user_years").to_f)/12
+  @the_princ = params.fetch("user_pv").to_f
+
+  @numerator = @the_r * @the_princ
+
+  @periods = @the_n * -1
+  @changed_r = 1 + @the_r
+  @r_power = @changed_r ** @periods
+  @denominator = 1 - @r_power
+  @the_result_payment = @numerator / @denominator
+  
+  erb(:payment_results)
+end
+
+
+get("/random/new") do
+  erb(:new_random)
+end
 
 
 
