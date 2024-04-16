@@ -12,7 +12,15 @@ get("/square/results") do
   erb(:square_results)
 end
 
+get("/square_root/new") do
+  erb(:new_square_root_calc)
+end
 
+get("/square_root/results") do
+  @the_num_2 = params.fetch("users_number_2").to_f
+  @the_result_2 = Math.sqrt(@the_num_2)
+  erb(:square_root_results)
+end
 
 
 
