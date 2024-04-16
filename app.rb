@@ -31,11 +31,13 @@ end
 
 get("/payment/results") do
   @the_apr = params.fetch("user_apr").to_f
+  @the_apr_percent = @the_apr.to_fs(:percentage, {:precision => 4})
   @the_years = params.fetch("user_years").to_f
 
   @the_r = ((params.fetch("user_apr").to_f)/100)/12
   @the_n = (params.fetch("user_years").to_f)/12
   @the_princ = params.fetch("user_pv").to_f
+  @the_principal = @the_princ.to_fs(:currency)
 
   @numerator = @the_r * @the_princ
 
@@ -44,6 +46,7 @@ get("/payment/results") do
   @r_power = @changed_r ** @periods
   @denominator = 1 - @r_power
   @the_result_payment = @numerator / @denominator
+  @the_result_payment = @the_result_payment.to_fs(:currency)
   
   erb(:payment_results)
 end
