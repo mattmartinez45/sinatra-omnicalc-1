@@ -40,7 +40,7 @@ get("/payment/results") do
   @the_years = params.fetch("user_years").to_f
 
   @the_r = ((params.fetch("user_apr").to_f)/100)/12
-  @the_n = (params.fetch("user_years").to_f)/12
+  @the_n = (params.fetch("user_years").to_f)*12
   @the_princ = params.fetch("user_pv").to_f
   @the_principal = @the_princ.to_fs(:currency)
 
